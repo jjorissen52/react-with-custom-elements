@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {render} from 'react-dom'
+import AsHTMLElement from "../../util/as-html-element";
 
 class Comments extends Component {
   render () {
@@ -13,8 +13,4 @@ class Comments extends Component {
 export default Comments
 export { Comments }
 
-const component = document.querySelector('#post-comments')
-if (component) {
-  const props = {...component.dataset}
-  render(<Comments {...props} />, component)
-}
+AsHTMLElement(Comments, ['post'], 'post-comments')

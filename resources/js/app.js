@@ -5,4 +5,3 @@
  */
 
 require('./components/Comments')
-require('./components/PostComments')

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="./public/js/app.js" type="application/javascript"></script>
+    <script src="./public/js/app.js" type="application/javascript" defer></script>
     <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,8 +19,6 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body" id="mbody">
-                    <div id="post-comments" data-post="1" data-nested="false"></div>
-
                     <post-comments :post="posts" nested="true"></post-comments>
                     <button v-on:click="increment()">Click Me</button>
                 </div>

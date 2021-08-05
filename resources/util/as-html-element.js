@@ -3,6 +3,7 @@ import {render} from "react-dom";
 import * as retargetEvents from "react-shadow-dom-retarget-events";
 
 const AsHTMLElement = (ReactComponent, props, elementName) => {
+    const ignore = new Set(['Error: Target container is not a DOM element.'])
     class CustomComponent extends HTMLElement {
         static get observedAttributes() {
             return props
@@ -26,7 +27,11 @@ const AsHTMLElement = (ReactComponent, props, elementName) => {
 
         attributeChangedCallback(name, oldValue, newValue) {
             if (CustomComponent.observedAttributes.includes(name)) {
-                render(this.mRender(this.props), this.mountPoint)
+                try {
+                    render(this.mRender(this.props), this.mountPoint)
+                } catch (e) {
+                    if (!ignore.has(String(e))) console.error(e)
+                }
             }
         }
     }
