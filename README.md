@@ -6,18 +6,15 @@ More info: [https://guillaumebriday.fr/rendering-react-components-with-custom-el
 
 ## How to use it
 
-Laravel is needed to provide a "real world" example with React in Backend application.
+Express renders a simple HTML template with the assets loaded.
 
+```bash
+git clone git@github.com:jjorissen52/react-with-custom-elements.git
+cd react-with-custom-elements
+yarn install
+yarn watch
+node run.js
 ```
-$ git clone git@github.com:guillaumebriday/react-with-custom-elements.git
-$ cd react-with-custom-elements
-$ composer install
-$ yarn install
-$ yarn development
-$ php artisan serve
-```
-
-Open [localhost:8000](http://localhost:8000)
 
 ## Contributing
 
