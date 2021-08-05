@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./public/js/app.js" type="application/javascript"></script>
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="./public/css/app.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
+
+                <div class="card-body" id="mbody">
+                    <div id="post-comments" data-post="1" data-nested="false"></div>
+
+                    <post-comments :post="posts" nested="true"></post-comments>
+                    <button v-on:click="increment()">Click My Ass</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+new Vue({
+    el: '#mbody',
+    data: () => ({
+        posts: 0
+    }),
+    methods: {
+        increment() {
+            console.log(this.posts)
+            this.posts += 1
+        }
+    }
+})
+</script>
+</body>
+</html>
