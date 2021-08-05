@@ -5,3 +5,5 @@
  */
 
 require('./components/Comments')
+require('./components/Button')
+window.store = require('./store').default

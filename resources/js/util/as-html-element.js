@@ -1,16 +1,32 @@
 import {createElement} from "react";
 import {render} from "react-dom";
 import * as retargetEvents from "react-shadow-dom-retarget-events";
+import {kebabCase} from "./misc";
+import store from '../store'
 
-const AsHTMLElement = (ReactComponent, props, elementName) => {
+const AsHTMLElement = (ReactComponent, props, elementName = null) => {
     const ignore = new Set(['Error: Target container is not a DOM element.'])
+    const name = elementName ?? kebabCase(ReactComponent.displayName ?? ReactComponent.name)
+    store[name] = {
+        ...store[name]
+    }
+    const defaultId = Object.keys(store[name]).length ? `${name}-${Object.keys(store[name]).length}` : name
     class CustomComponent extends HTMLElement {
         static get observedAttributes() {
             return props
         }
 
         get props() {
-            return Object.fromEntries(Object.values(this.attributes).map(attr => [attr.name, attr.value]))
+            const pProps = Object.values(this.attributes).reduce((accum, attr) => {
+                accum[attr.name] = attr.value
+                return accum
+            }, {id: defaultId})
+            if (!this.firstRender) {
+                store[name][pProps.id] = {}
+                this.firstRender = true
+            }
+            pProps.storage = { store, handle: store[name][pProps.id], path: [name, pProps.id] }
+            return pProps
         }
 
         mRender() {
@@ -36,7 +52,7 @@ const AsHTMLElement = (ReactComponent, props, elementName) => {
         }
     }
 
-    customElements.define(elementName, CustomComponent)
+    customElements.define(name, CustomComponent)
     return CustomComponent
 }
 

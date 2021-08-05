@@ -20,7 +20,9 @@
 
                 <div class="card-body" id="mbody">
                     <post-comments :post="posts" nested="true"></post-comments>
-                    <button v-on:click="increment()">Click Me</button>
+                    <button v-on:click="increment()">More Comments</button>
+                    <br><br>
+                    <my-button :posts="posts" :fromstore="fromstore" v-on:click="updateStore()"/>
                 </div>
             </div>
         </div>
@@ -30,12 +32,21 @@
 new Vue({
     el: '#mbody',
     data: () => ({
-        posts: 0
+        posts: 0,
+        store: window.store
     }),
     methods: {
         increment() {
-            console.log(this.posts)
             this.posts += 1
+        },
+        updateStore() {
+            this.store = window.store
+        }
+    },
+    computed: {
+        fromstore() {
+            if (!this.store) return 0
+            return this.store["my-button"]['my-button'].timesClicked
         }
     }
 })

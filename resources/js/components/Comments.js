@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import AsHTMLElement from "../../util/as-html-element";
+import AsHTMLElement from "../util/as-html-element";
 
 class Comments extends Component {
   render () {
