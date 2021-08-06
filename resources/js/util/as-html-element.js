@@ -1,6 +1,5 @@
 import {createElement} from "react";
 import {render} from "react-dom";
-import * as retargetEvents from "react-shadow-dom-retarget-events";
 import {kebabCase} from "./misc";
 import store from '../store'
 
@@ -35,16 +34,13 @@ const AsHTMLElement = (ReactComponent, props, elementName = null) => {
 
         connectedCallback() {
             this.mountPoint = document.createElement('span');
-            const shadowRoot = this.attachShadow({mode: 'open'});
-            shadowRoot.appendChild(this.mountPoint);
-            render(this.mRender(this.props), this.mountPoint)
-            retargetEvents(shadowRoot);
+            render(this.mRender(this.props), this)
         }
 
         attributeChangedCallback(name, oldValue, newValue) {
             if (CustomComponent.observedAttributes.includes(name)) {
                 try {
-                    render(this.mRender(this.props), this.mountPoint)
+                    render(this.mRender(this.props), this)
                 } catch (e) {
                     if (!ignore.has(String(e))) console.error(e)
                 }
